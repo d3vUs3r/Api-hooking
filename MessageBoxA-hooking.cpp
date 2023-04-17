@@ -20,10 +20,10 @@ int __stdcall HookedMessageBox(HWND hWnd, LPCSTR lpText, LPCSTR lpCaption, UINT 
 
 
     // unpatch MessageBoxA
-    DWORD oldProtect;
-    VirtualProtectEx(GetCurrentProcess(), (LPVOID)messageBoxAddress, sizeof(messageBoxOriginalBytes), PAGE_EXECUTE_READWRITE, &oldProtect);
+    //DWORD oldProtect;
+    //VirtualProtectEx(GetCurrentProcess(), (LPVOID)messageBoxAddress, sizeof(messageBoxOriginalBytes), PAGE_EXECUTE_READWRITE, &oldProtect);
     BOOL unhooked = WriteProcessMemory(GetCurrentProcess(), (LPVOID)messageBoxAddress, messageBoxOriginalBytes, sizeof(messageBoxOriginalBytes), &bytesWritten);
-    VirtualProtectEx(GetCurrentProcess(), (LPVOID)messageBoxAddress, sizeof(messageBoxOriginalBytes), oldProtect, &oldProtect);
+    //VirtualProtectEx(GetCurrentProcess(), (LPVOID)messageBoxAddress, sizeof(messageBoxOriginalBytes), oldProtect, &oldProtect);
 
     if (!unhooked) {
         std::cerr << "Failed to unhook MessageBoxA" << std::endl;
